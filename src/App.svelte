@@ -1,13 +1,19 @@
 <script>
 	import AddTodoItem from './AddTodoItem.svelte'
 	export let name;
+
+	const addTodoItemProps = {
+		title: 'Please type todo here:',
+		buttonTitle: "Go!"
+	}
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
 </main>
-<AddTodoItem />
-<button>Add Todo</button>
+<AddTodoItem
+	{...addTodoItemProps}
+/>
 
 <style>
 	main {
@@ -28,5 +34,9 @@
 		main {
 			max-width: none;
 		}
+	}
+
+	.todo-items-container {
+
 	}
 </style>
