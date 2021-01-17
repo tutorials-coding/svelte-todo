@@ -3,16 +3,17 @@
   const dispatch = createEventDispatcher()
 
   export let text
+  export let checked
 
-  function handleCheckedChange(event) {
-    dispatch('checked', event.target.checked)
+  $: {
+    dispatch('checked', checked)
   }
 </script>
 
 <div class="main-container">
-  <input 
+  <input
     type="checkbox"
-    on:input={handleCheckedChange}
+    bind:checked={checked}
   />
   <p>{text}</p>
 </div>

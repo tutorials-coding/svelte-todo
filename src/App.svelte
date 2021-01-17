@@ -3,14 +3,23 @@
 	import AddTodoItem from './AddTodoItem.svelte'
 	import TodoItem from './TodoItem.svelte'
 
-	let items = []
+	let items = [{
+			id: uuid(),
+			text: 'First Item',
+			done: false,
+		}, {
+			id: uuid(),
+			text: 'Second Item',
+			checked: true,
+		}]
 	$: count = items.length;
+	$: checkedCount = items.filter(({ checked }) => checked).length
 	
 	function handleAddTodoItem(event) {
     items = [...items, {
       id: uuid(),
 			text: event.detail,
-			done: false,
+			checked: false,
     }]
 	}
 
@@ -18,7 +27,7 @@
 		items = items.map(item => (item.id === id
 			? ({
 				...item,
-				done: checked
+				checked
 			})
 			: item
 		))
@@ -27,7 +36,7 @@
 
 <AddTodoItem
 	title='Please type todo here:'
-	buttonTitle={`Add (${count})`}
+	buttonTitle={`Add (${checkedCount}/${count})`}
 	on:add={handleAddTodoItem}
 />
 
@@ -35,9 +44,10 @@
   No items yet
 {:else}
   <div>
-    {#each items as { id, text }, index (id)}
+    {#each items as { id, text, checked }, index (id)}
 			<TodoItem
 				text={`${index + 1}: ${text}`}
+				{checked}
 				on:checked={event => handleItemChecked(id, event.detail)}
 			/>
     {/each}
