@@ -6,7 +6,6 @@
   export let buttonTitle = ''
 
   let text = ''
-  $: console.log(typeof(text))
 
   function handleAddClick() {
     dispath('add', text)
@@ -20,6 +19,11 @@
     id="text"
     bind:value={text}
   />
+
+  <div
+    contenteditable="true"
+    bind:innerHTML={text}
+  ></div>
   <button on:click={handleAddClick}>{buttonTitle}</button>
 </div>
 
