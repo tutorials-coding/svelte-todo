@@ -19,11 +19,6 @@
     id="text"
     bind:value={text}
   />
-
-  <div
-    contenteditable="true"
-    bind:innerHTML={text}
-  ></div>
   <button on:click={handleAddClick}>{buttonTitle}</button>
 </div>
 

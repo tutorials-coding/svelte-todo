@@ -32,29 +32,7 @@
 			: item
 		))
 	}
-
-	let reply
-	const questionReplies = [{
-		id: 1,
-		text: 'First reply'
-	}, {
-		id: 2,
-		text: 'Second reply'
-	}, {
-		id: 3,
-		text: 'Third reply'
-	}]
 </script>
-
-<p>Choose correct one:</p>
-<div>
-	{#each questionReplies as { id, text } (id)}
-		<label>
-			<input type=radio bind:group={reply} value={id}>
-			{text}
-		</label>
-	{/each}
-</div>
 
 <AddTodoItem
 	title='Please type todo here:'
@@ -67,9 +45,6 @@
 {:else}
   <div>
 		{#each items as { id, text, checked }, index (id)}
-			<input
-				bind:value={text}
-			/>
 			<TodoItem
 				text={`${index + 1}: ${text}`}
 				{checked}
