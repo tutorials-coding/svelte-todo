@@ -1,7 +1,12 @@
 <script>
   let title = "Enter what do you want to do:"
+  const src = "https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.png"
 </script>
 
+<img
+  {src}
+  alt="Svelte logo"  
+>
 <div class="main-container">
   <label for="todo-text">{ title }</label>
   <input class="todo-input" id="todo-text" />
@@ -16,5 +21,8 @@
   }
   .todo-input {
     width: 100%;
+  }
+  img {
+    width: 150px;
   }
 </style>
