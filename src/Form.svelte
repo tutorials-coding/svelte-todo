@@ -6,10 +6,7 @@
   export let buttonTitle = ''
 
   let text = ''
-  function handleTodoTextChange(event) {
-    text = event.target.value
-    console.log(text)
-  }
+  $: console.log(typeof(text))
 
   function handleAddClick() {
     dispath('add', text)
@@ -21,7 +18,7 @@
   <input
     class="input"
     id="text"
-    on:input={handleTodoTextChange}
+    bind:value={text}
   />
   <button on:click={handleAddClick}>{buttonTitle}</button>
 </div>
