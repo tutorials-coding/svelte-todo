@@ -6,13 +6,16 @@ export default function getTodos() {
       // reject(new Error('Error 500'))
       resolve([{
           id: uuid(),
-          text: 'Todo Item 1 received from server'
+          text: 'Todo Item 1 received from server',
+          checked: false
         }, {
           id: uuid(),
-          text: 'Todo Item 2 received from server'
+          text: 'Todo Item 2 received from server',
+          checked: false
         }, {
           id: uuid(),
-          text: 'Todo Item 3 received from server'
+          text: 'Todo Item 3 received from server',
+          checked: false
       }])
     }, 1000)
   })
