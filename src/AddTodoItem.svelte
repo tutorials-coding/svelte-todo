@@ -1,51 +1,15 @@
 <script>
-  import { v4 as uuid } from 'uuid'
-  import TodoItem from './TodoItem.svelte'
+  import { createEventDispatcher } from 'svelte'
+  import Form from './Form.svelte'
+
+  const dispath = createEventDispatcher()
 
   export let title = "Enter what do you want to do:"
   export let buttonTitle = 'Add todo'
-
-  let items = []
-  $: count = items.length;
-
-  function handleAddClick() {
-    items = [...items, {
-      id: uuid(),
-      text: 'todo item'
-    }]
-  }
-
-  console.log($$props)
 </script>
 
-<div class="main-container">
-  <label for="todo-text">{title}</label>
-  <input class="todo-input" id="todo-text" />
-  <button on:click={handleAddClick}>{buttonTitle} (Items: {count})</button>
-</div>
-
-{#if count === 0}
-  No items yet
-{:else if count === 1}
-  You have only one todo: {items[0].text}
-{:else}
-  <div>
-    {#each items as { id, text }, index (id)}
-      <TodoItem text={`${index + 1}: ${text}`} />
-    {/each}
-  </div>
-{/if}
-
-<style>
-  .main-container {
-    background-color: lightseagreen;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  .todo-input {
-    width: 100%;
-  }
-  img {
-    width: 150px;
-  }
-</style>
+<Form 
+  title={title}
+  buttonTitle={buttonTitle}
+  on:add
+/>
