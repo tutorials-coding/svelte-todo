@@ -9,8 +9,19 @@
 	function handleAddTodoItem(event) {
     items = [...items, {
       id: uuid(),
-      text: event.detail
+			text: event.detail,
+			done: false,
     }]
+	}
+
+	function handleItemChecked(id, checked) {
+		items = items.map(item => (item.id === id
+			? ({
+				...item,
+				done: checked
+			})
+			: item
+		))
 	}
 </script>
 
@@ -22,16 +33,13 @@
 
 {#if count === 0}
   No items yet
-{:else if count === 1}
-  You have only one todo: {items[0].text}
 {:else}
   <div>
     {#each items as { id, text }, index (id)}
-      <TodoItem text={`${index + 1}: ${text}`} />
+			<TodoItem
+				text={`${index + 1}: ${text}`}
+				on:checked={event => handleItemChecked(id, event.detail)}
+			/>
     {/each}
   </div>
 {/if}
-
-
-<style>
-</style>
