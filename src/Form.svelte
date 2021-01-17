@@ -1,11 +1,22 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, tick } from 'svelte'
+  import { format } from './format'
+
   const dispath = createEventDispatcher()
 
   export let title = ''
   export let buttonTitle = ''
 
   let text = ''
+
+  async function handleTextChange(event) {
+    const { selectionStart, selectionEnd, value } = this;
+    text = format(event.target.value)
+
+    await tick();
+		this.selectionStart = selectionStart;
+		this.selectionEnd = selectionEnd;
+  }
 
   function handleAddClick() {
     dispath('add', text)
@@ -17,7 +28,8 @@
   <input
     class="input"
     id="text"
-    bind:value={text}
+    value={text}
+    on:input={handleTextChange}
   />
   <button on:click={handleAddClick}>{buttonTitle}</button>
 </div>
