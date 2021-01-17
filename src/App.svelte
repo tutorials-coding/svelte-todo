@@ -1,23 +1,26 @@
 <script>
-	import { onMount } from 'svelte'
+	import { onMount, beforeUpdate, afterUpdate } from 'svelte'
 	import { v4 as uuid } from 'uuid'
 	import AddTodoItem from './AddTodoItem.svelte'
 	import TodoItem from './TodoItem.svelte'
 	import getTodos from './getTodos'
-	import { onInterval }  from './interval'
 
 	let items = []
-	let counter = 0
 	$: count = items.length;
 	$: checkedCount = items.filter(({ checked }) => checked).length
 
-	onInterval(() => {
-		counter++
-	}, 1000)
+	beforeUpdate(() => {
+		console.log('beforeUpdate called')
+	});
 
 	onMount(async () => {
+		console.log('onMount called')
 		items = await getTodos()
 	})
+
+	afterUpdate(() => {
+		console.log('afterUpdate called')
+	});
 	
 	function handleAddTodoItem(event) {
     items = [...items, {
@@ -38,7 +41,6 @@
 	}
 </script>
 
-<p>{counter}</p>
 <AddTodoItem
 	title='Please type todo here:'
 	buttonTitle={`Add (${checkedCount}/${count})`}
