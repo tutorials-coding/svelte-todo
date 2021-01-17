@@ -1,6 +1,5 @@
 <script>
 	import AddTodoItem from './AddTodoItem.svelte'
-	export let name;
 
 	const addTodoItemProps = {
 		title: 'Please type todo here:',
@@ -8,35 +7,9 @@
 	}
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-</main>
 <AddTodoItem
 	{...addTodoItemProps}
 />
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-
-	.todo-items-container {
-
-	}
 </style>
