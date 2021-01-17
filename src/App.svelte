@@ -7,6 +7,7 @@
 	<h1>Hello {name}!</h1>
 </main>
 <AddTodoItem />
+<button>Add Todo</button>
 
 <style>
 	main {

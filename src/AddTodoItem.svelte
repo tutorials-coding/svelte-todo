@@ -1,5 +1,5 @@
 <script>
-  let title = "Enter what do you want to do:"
+  let title = "Enter <strong>what do you want to do:</strong>"
   const src = "https://raw.githubusercontent.com/sveltejs/branding/master/svelte-logo.png"
 </script>
 
@@ -8,7 +8,7 @@
   alt="Svelte logo"  
 >
 <div class="main-container">
-  <label for="todo-text">{ title }</label>
+  <label for="todo-text">{@html title}</label>
   <input class="todo-input" id="todo-text" />
   <button>Add Todo</button>
 </div>
@@ -24,5 +24,9 @@
   }
   img {
     width: 150px;
+  }
+  :global(button) {
+    background-color: indigo;
+    color: white;
   }
 </style>
