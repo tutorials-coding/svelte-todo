@@ -1,17 +1,11 @@
 <script>
-	import { onDestroy, onMount } from 'svelte'
 	import { v4 as uuid } from 'uuid'
 	import AddTodoItem from './AddTodoItem.svelte'
 	import TodoItem from './TodoItem.svelte'
 	import { todoItems } from './store'
 
-	let items = []
-	const unsubscribe = todoItems.subscribe(value => {
-		items = value
-	})
-
-	$: count = items.length;
-	$: checkedCount = items.filter(({ checked }) => checked).length
+	$: count = $todoItems.length;
+	$: checkedCount = $todoItems.filter(({ checked }) => checked).length
 	
 	function handleAddTodoItem(event) {
 		todoItems.update(items => [...items, {
@@ -30,10 +24,6 @@
 			: item
 		))) 
 	}
-
-	onDestroy(() => {
-		unsubscribe()
-	})
 </script>
 
 <AddTodoItem
@@ -46,7 +36,7 @@
   No items yet
 {:else}
   <div>
-		{#each items as { id, text, checked }, index (id)}
+		{#each $todoItems as { id, text, checked }, index (id)}
 			<TodoItem
 				text={`${index + 1}: ${text}`}
 				{checked}
