@@ -2,7 +2,7 @@
 	import { v4 as uuid } from 'uuid'
 	import AddTodoItem from './AddTodoItem.svelte'
 	import TodoItem from './TodoItem.svelte'
-	import { todoItems } from './store'
+	import { todoItems, mousePosition } from './store'
 
 	$: count = $todoItems.length;
 	$: checkedCount = $todoItems.filter(({ checked }) => checked).length
@@ -26,6 +26,7 @@
 	}
 </script>
 
+<p>{JSON.stringify($mousePosition, null, 2)}</p>
 <AddTodoItem
 	title='Please type todo here:'
 	buttonTitle={`Add (${checkedCount}/${count})`}
