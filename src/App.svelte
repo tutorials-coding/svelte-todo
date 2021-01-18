@@ -3,10 +3,8 @@
 	import AddTodoItem from './AddTodoItem.svelte'
 	import TodoItem from './TodoItem.svelte'
 	import { todoItems, mousePosition } from './store'
+	import { todoStats } from './todoStatsStore'
 
-	$: count = $todoItems.length;
-	$: checkedCount = $todoItems.filter(({ checked }) => checked).length
-	
 	function handleAddTodoItem(event) {
 		todoItems.update(items => [...items, {
       id: uuid(),
@@ -29,11 +27,11 @@
 <p>{JSON.stringify($mousePosition, null, 2)}</p>
 <AddTodoItem
 	title='Please type todo here:'
-	buttonTitle={`Add (${checkedCount}/${count})`}
+	buttonTitle={`Add (${$todoStats.doneCount}/${$todoStats.totalCount})`}
 	on:add={handleAddTodoItem}
 />
 
-{#if count === 0}
+{#if $todoStats.totalCount === 0}
   No items yet
 {:else}
   <div>
