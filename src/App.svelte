@@ -14,7 +14,7 @@
 	$: checkedCount = items.filter(({ checked }) => checked).length
 	
 	function handleAddTodoItem(event) {
-		todoItems.set([...items, {
+		todoItems.update(items => [...items, {
       id: uuid(),
 			text: event.detail,
 			checked: false,
@@ -22,7 +22,7 @@
 	}
 
 	function handleItemChecked(id, checked) {
-		todoItems.set(items.map(item => (item.id === id
+		todoItems.update(items => items.map(item => (item.id === id
 			? ({
 				...item,
 				checked
