@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { format } from './format'
 
   const dispath = createEventDispatcher()
 
@@ -10,7 +9,7 @@
   let text = ''
 
   async function handleTextChange(event) {
-    text = format(event.target.value)
+    text = event.target.value
   }
 
   function handleAddClick() {
