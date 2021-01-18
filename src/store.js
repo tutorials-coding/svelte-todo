@@ -24,3 +24,4 @@ function createTodoStore() {
 }
 
 export const todoItems = createTodoStore();
+export const userName = writable('')

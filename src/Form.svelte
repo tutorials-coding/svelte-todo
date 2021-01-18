@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+  import { userName } from './store'
 
   const dispath = createEventDispatcher()
 
@@ -25,6 +26,15 @@
     value={text}
     on:input={handleTextChange}
   />
+
+  <label for="userName">User Name:</label>
+  {$userName}
+  <input
+    class="input"
+    id="userName"
+    bind:value={$userName}
+  />
+
   <button on:click={handleAddClick}>{buttonTitle}</button>
 </div>
 
