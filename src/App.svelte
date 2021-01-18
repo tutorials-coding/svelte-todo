@@ -1,35 +1,39 @@
 <script>
-	import { onMount } from 'svelte'
+	import { onDestroy, onMount } from 'svelte'
 	import { v4 as uuid } from 'uuid'
 	import AddTodoItem from './AddTodoItem.svelte'
 	import TodoItem from './TodoItem.svelte'
-	import getTodos from './getTodos'
+	import { todoItems } from './store'
 
 	let items = []
+	const unsubscribe = todoItems.subscribe(value => {
+		items = value
+	})
+
 	$: count = items.length;
 	$: checkedCount = items.filter(({ checked }) => checked).length
-
-	onMount(async () => {
-		items = await getTodos()
-	})
 	
 	function handleAddTodoItem(event) {
-    items = [...items, {
+		todoItems.set([...items, {
       id: uuid(),
 			text: event.detail,
 			checked: false,
-    }]
+    }])
 	}
 
 	function handleItemChecked(id, checked) {
-		items = items.map(item => (item.id === id
+		todoItems.set(items.map(item => (item.id === id
 			? ({
 				...item,
 				checked
 			})
 			: item
-		))
+		))) 
 	}
+
+	onDestroy(() => {
+		unsubscribe()
+	})
 </script>
 
 <AddTodoItem
