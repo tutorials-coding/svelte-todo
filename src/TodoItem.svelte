@@ -1,6 +1,6 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-  import { tweened } from 'svelte/motion';
+  import { createEventDispatcher, onMount } from 'svelte'
+  import { tweened, spring } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
   import { interpolateLab } from 'd3-interpolate';
   
@@ -20,28 +20,60 @@
     }
   });
 
+  let container
+  let containerPos = { left: -100, top: -100 }
+  let coords = spring(containerPos, {
+    stiffness: 0.1,
+    damping: 0.25
+  });
+  onMount(() => {
+    containerPos = {
+      left: container.offsetLeft + 100,
+      top: container.offsetTop + 100,
+    }
+    coords.set(containerPos)
+  })
+
   $: {
     dispatch('checked', checked)
     checkedMotion.set(checked ? '#64ad80' : '#faf792')
   }
 </script>
 
-<div class="main-container" style="background-color: {$checkedMotion}">
-  <input
-    type="checkbox"
-    bind:checked={checked}
-  />
-  <p>{text}</p>
+<div class="main-container">
+  <div
+    class="inner-container"
+    style="
+      background-color: {$checkedMotion};
+      left: {$coords.left}px;
+      top: {$coords.top}px;
+    "
+    bind:this={container}
+  >
+    <input
+      type="checkbox"
+      bind:checked={checked}
+    />
+    <p>{text}</p>
+  </div>
 </div>
 
 <style>
   .main-container {
-    display: flex;
+    position: relative;
     height: 50px;
+    width: 100%;
+  }
+  .inner-container {
+    position: absolute;
+    display: flex;
     border-radius: 5px;
     align-items: center;
     background-color: darkseagreen;
     padding: 0 15px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
   }
   input {
     margin: 0;
