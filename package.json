@@ -17,6 +17,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "d3-interpolate": "^2.0.1",
     "sirv-cli": "^1.0.0",
     "uuid": "^8.3.2"
   }
