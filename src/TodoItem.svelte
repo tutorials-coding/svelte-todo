@@ -2,7 +2,6 @@
   import { createEventDispatcher } from 'svelte'
   import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
-  // import fly transtion
   import { fly } from 'svelte/transition';
   import { interpolateLab } from 'd3-interpolate';
   
@@ -32,7 +31,6 @@
   }
 </script>
 
-<!-- apply fly transition and parameters -->
 <div
   transition:fly="{{ y: 200, duration: 500 }}"
   class="main-container"
