@@ -1,11 +1,13 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
+  import { typewriter } from './transition'
   const dispath = createEventDispatcher()
 
   export let title = ''
   export let buttonTitle = ''
 
   let text = ''
+  let isTitleVisible = false
 
   async function handleTextChange(event) {
     text = event.target.value
@@ -14,10 +16,19 @@
   function handleAddClick() {
     dispath('add', text)
   }
+
+  onMount(() => {
+    isTitleVisible = true
+  })
 </script>
 
 <div class="main-container">
-  <label for="text">{title}</label>
+  {#if isTitleVisible}
+  <label
+    in:typewriter
+    for="text"
+  >{title}</label>
+  {/if}
   <input
     class="input"
     id="text"
