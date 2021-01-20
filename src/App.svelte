@@ -1,8 +1,14 @@
 <script>
+	import { onMount } from 'svelte'
 	import AddTodoItem from './AddTodoItem.svelte'
 	import TodoItem from './TodoItem.svelte'
 	import { todoItems } from './store'
 	import { todoStats } from './todoStatsStore'
+
+	let mounted = false
+	onMount(() => {
+		mounted = true
+	})
 
 	function handleAddTodoItem(event) {
 		todoItems.add(event.detail)
@@ -25,21 +31,23 @@
 	/>
 </div>
 
-{#if $todoStats.totalCount === 0}
-  No items yet
-{:else}
-  <div class="todo-items-container">
-		{#each $todoItems as { id, text, checked }, index (id)}
-			<div class="todo-item-container">
-				<TodoItem
-					text={`${index + 1}: ${text}`}
-					{checked}
-					on:checked={event => handleItemChecked(id, event.detail)}
-					on:remove={() => handleItemRemove(id)}
-				/>
-			</div>
-    {/each}
-  </div>
+{#if mounted}
+	{#if $todoStats.totalCount === 0}
+		No items yet
+	{:else}
+		<div class="todo-items-container">
+			{#each $todoItems as { id, text, checked }, index (id)}
+				<div class="todo-item-container">
+					<TodoItem
+						text={`${index + 1}: ${text}`}
+						{checked}
+						on:checked={event => handleItemChecked(id, event.detail)}
+						on:remove={() => handleItemRemove(id)}
+					/>
+				</div>
+			{/each}
+		</div>
+	{/if}
 {/if}
 
 <style>

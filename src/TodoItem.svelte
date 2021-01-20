@@ -32,7 +32,7 @@
 </script>
 
 <div
-  in:fly="{{ y: 200, duration: 500 }}"
+  in:fly|local="{{ y: 200, duration: 500 }}"
   out:fade
   class="main-container"
 >
