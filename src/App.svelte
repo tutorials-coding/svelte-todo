@@ -12,7 +12,6 @@
 		todoItems.setCheckedStatus(id, checked)
 	}
 
-	// add handler
 	function handleItemRemove(id) {
 		todoItems.remove(id)
 	}
@@ -32,7 +31,6 @@
   <div class="todo-items-container">
 		{#each $todoItems as { id, text, checked }, index (id)}
 			<div class="todo-item-container">
-				<!-- add on:remove -->
 				<TodoItem
 					text={`${index + 1}: ${text}`}
 					{checked}

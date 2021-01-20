@@ -40,9 +40,7 @@
       type="checkbox"
       bind:checked={checked}
     />
-    <!-- add styles -->
     <p class="text">{text}</p>
-    <!-- add remove button -->
     <p class="remove-button" on:click={handleRemoveClick}>Remove</p>
   </div>
 </div>
@@ -71,11 +69,9 @@
   p {
     margin: 0;
   }
-  /* add styles */
   .text {
     flex: 1;
   }
-  /* add styles */
   .remove-button {
     color: brown;
     font-weight: 700;
