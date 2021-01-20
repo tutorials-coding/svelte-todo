@@ -2,7 +2,6 @@
   import { createEventDispatcher } from 'svelte'
   import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
-  // import fade transition
   import { fly, fade } from 'svelte/transition';
   import { interpolateLab } from 'd3-interpolate';
   
@@ -32,7 +31,6 @@
   }
 </script>
 
-<!-- apply in and out transitions -->
 <div
   in:fly="{{ y: 200, duration: 500 }}"
   out:fade
