@@ -2,6 +2,8 @@
   import { createEventDispatcher } from 'svelte'
   import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
+  // import transition
+  import { fade } from 'svelte/transition';
   import { interpolateLab } from 'd3-interpolate';
   
   const dispatch = createEventDispatcher()
@@ -31,7 +33,11 @@
   }
 </script>
 
-<div class="main-container">
+<!-- apply transition -->
+<div
+  transition:fade  
+  class="main-container"
+>
   <div
     class="inner-container"
     style="background-color: {$checkedMotion};"
