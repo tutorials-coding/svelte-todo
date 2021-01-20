@@ -2,9 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
-  import { fade } from 'svelte/transition';
-  // import custom transition
-  import { custom } from './transition'
+  import { fly, fade } from 'svelte/transition';
   import { interpolateLab } from 'd3-interpolate';
   
   const dispatch = createEventDispatcher()
@@ -33,9 +31,8 @@
   }
 </script>
 
-<!-- apply custom -->
 <div
-  in:custom="{{ duration: 3000 }}"
+  in:fly="{{ y: 200, duration: 500 }}"
   out:fade
   class="main-container"
 >
