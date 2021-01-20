@@ -2,7 +2,6 @@
   import { createEventDispatcher } from 'svelte'
   import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
-  // import transition
   import { fade } from 'svelte/transition';
   import { interpolateLab } from 'd3-interpolate';
   
@@ -27,13 +26,11 @@
     checkedMotion.set(checked ? '#64ad80' : '#faf792')
   }
 
-  // add handler
   function handleRemoveClick() {
     dispatch('remove')
   }
 </script>
 
-<!-- apply transition -->
 <div
   transition:fade  
   class="main-container"
