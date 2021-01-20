@@ -2,7 +2,6 @@
   import { createEventDispatcher } from 'svelte'
   import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
-  import { fly, fade } from 'svelte/transition';
   import { interpolateLab } from 'd3-interpolate';
   
   const dispatch = createEventDispatcher()
@@ -31,11 +30,7 @@
   }
 </script>
 
-<div
-  in:fly|local="{{ y: 200, duration: 500 }}"
-  out:fade
-  class="main-container"
->
+<div class="main-container">
   <div
     class="inner-container"
     style="background-color: {$checkedMotion};"

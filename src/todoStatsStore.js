@@ -4,12 +4,15 @@ import { todoItems } from './store'
 export const todoStats = derived(
   [todoItems],
   ([todoItems]) => {
-    const doneCount = todoItems.filter(item => item.checked).length
+    const doneItems = todoItems.filter(item => item.checked)
+    const doneCount = doneItems.length
     const totalCount = todoItems.length
     return {
       doneCount,
       totalCount,
-      leftTodoCount: totalCount - doneCount
+      leftTodoCount: totalCount - doneCount,
+      doneItems,
+      notDoneItems: todoItems.filter(item => !item.checked)
     }
   }
 )

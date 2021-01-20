@@ -4,6 +4,26 @@
   import TodoItem from './TodoItem.svelte'
   import { todoItems } from './store'
   import { todoStats } from './todoStatsStore'
+  import { quintOut } from 'svelte/easing';
+  import { crossfade } from 'svelte/transition';
+
+  const [send, receive] = crossfade({
+    duration: d => Math.sqrt(d * 200),
+
+    fallback(node, params) {
+      const style = getComputedStyle(node);
+      const transform = style.transform === 'none' ? '' : style.transform;
+
+      return {
+        duration: 600,
+        easing: quintOut,
+        css: t => `
+          transform: ${transform} scale(${t});
+          opacity: ${t}
+        `
+      };
+    }
+  });
 
   let mounted = false
   onMount(() => {
@@ -31,30 +51,59 @@
   />
 </div>
 
-{#if mounted}
   {#if $todoStats.totalCount === 0}
     No items yet
   {:else}
-    <div class="todo-items-container">
-      {#each $todoItems as { id, text, checked }, index (id)}
-        <div class="todo-item-container">
-          <TodoItem
-            text={`${index + 1}: ${text}`}
-            {checked}
-            on:checked={event => handleItemChecked(id, event.detail)}
-            on:remove={() => handleItemRemove(id)}
-          />
-        </div>
-      {/each}
+    <div class="todos-container">
+      <div class="todo-items-container">
+        {#each $todoStats.notDoneItems as { id, text, checked }, index (id)}
+          <div
+            class="todo-item-container"
+            in:receive="{{key: id}}"
+            out:send="{{key: id}}"
+          >
+            <TodoItem
+              text={`${index + 1}: ${text}`}
+              {checked}
+              on:checked={event => handleItemChecked(id, event.detail)}
+              on:remove={() => handleItemRemove(id)}
+            />
+          </div>
+        {/each}
+      </div>
+      <div class="todo-items-container">
+        {#each $todoStats.doneItems as { id, text, checked }, index (id)}
+          <div
+            class="todo-item-container"
+            in:receive="{{key: id}}"
+            out:send="{{key: id}}"
+          >
+            <TodoItem
+              text={`${index + 1}: ${text}`}
+              {checked}
+              on:checked={event => handleItemChecked(id, event.detail)}
+              on:remove={() => handleItemRemove(id)}
+            />
+          </div>
+        {/each}
+      </div>
     </div>
   {/if}
-{/if}
 
 <style>
   .add-todo-item-container {
     margin-bottom: 5px;
   }
-  .todo-items-container:not(:last-child) > .todo-item-container {
+  .todo-items-container {
+    flex: 1;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  .todo-items-container > .todo-item-container:not(:last-child) {
     margin-bottom: 5px;
+  }
+  .todos-container {
+    width: 100%;
+    display: flex;
   }
 </style>
