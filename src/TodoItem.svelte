@@ -2,7 +2,8 @@
   import { createEventDispatcher } from 'svelte'
   import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
-  import { fade } from 'svelte/transition';
+  // import fly transtion
+  import { fly } from 'svelte/transition';
   import { interpolateLab } from 'd3-interpolate';
   
   const dispatch = createEventDispatcher()
@@ -31,8 +32,9 @@
   }
 </script>
 
+<!-- apply fly transition and parameters -->
 <div
-  transition:fade  
+  transition:fly="{{ y: 200, duration: 500 }}"
   class="main-container"
 >
   <div
