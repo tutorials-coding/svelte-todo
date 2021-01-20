@@ -36,7 +36,6 @@ export function typewriter(node, { speed = 100 }) {
     css: t => {
       // use color from to as params
       const color = interpolateLab('#64ad80', '#faf792')(t)
-      console.log(color)
       return `
         color: ${color};
       `

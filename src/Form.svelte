@@ -27,6 +27,10 @@
   <label
     in:typewriter
     for="text"
+    on:introstart="{() => console.log('introstart')}"
+    on:outrostart="{() => console.log('outrostart')}"
+    on:introend="{() => console.log('introend')}"
+    on:outroend="{() => console.log('outroend')}"
   >{title}</label>
   {/if}
   <input
