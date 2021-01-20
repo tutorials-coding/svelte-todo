@@ -1,6 +1,6 @@
 <script>
-  import { createEventDispatcher, onMount } from 'svelte'
-  import { tweened, spring } from 'svelte/motion';
+  import { createEventDispatcher } from 'svelte'
+  import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
   import { interpolateLab } from 'd3-interpolate';
   
@@ -20,20 +20,6 @@
     }
   });
 
-  let container
-  let containerPos = { left: -100, top: -100 }
-  let coords = spring(containerPos, {
-    stiffness: 0.1,
-    damping: 0.25
-  });
-  onMount(() => {
-    containerPos = {
-      left: container.offsetLeft + 100,
-      top: container.offsetTop + 100,
-    }
-    coords.set(containerPos)
-  })
-
   $: {
     dispatch('checked', checked)
     checkedMotion.set(checked ? '#64ad80' : '#faf792')
@@ -43,12 +29,7 @@
 <div class="main-container">
   <div
     class="inner-container"
-    style="
-      background-color: {$checkedMotion};
-      left: {$coords.left}px;
-      top: {$coords.top}px;
-    "
-    bind:this={container}
+    style="background-color: {$checkedMotion};"
   >
     <input
       type="checkbox"

@@ -2,7 +2,15 @@ import { writable } from 'svelte/store';
 import { v4 as uuid } from 'uuid'
 
 function createTodoStore() {
-  const { subscribe, set, update } = writable([]);
+  const { subscribe, set, update } = writable([{
+    id: uuid(),
+    text: 'Learn JS',
+    checked: false,
+  }, {
+    id: uuid(),
+    text: 'Learn Svelte',
+    checked: true,
+  }]);
 
   return {
     subscribe,
