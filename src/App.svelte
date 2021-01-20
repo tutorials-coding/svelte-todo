@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte'
   import AddTodoItem from './AddTodoItem.svelte'
   import TodoItem from './TodoItem.svelte'
   import { todoItems } from './store'
@@ -24,11 +23,6 @@
       };
     }
   });
-
-  let mounted = false
-  onMount(() => {
-    mounted = true
-  })
 
   function handleAddTodoItem(event) {
     todoItems.add(event.detail)
