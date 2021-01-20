@@ -11,6 +11,11 @@
 	function handleItemChecked(id, checked) {
 		todoItems.setCheckedStatus(id, checked)
 	}
+
+	// add handler
+	function handleItemRemove(id) {
+		todoItems.remove(id)
+	}
 </script>
 
 <div class="add-todo-item-container">
@@ -27,10 +32,12 @@
   <div class="todo-items-container">
 		{#each $todoItems as { id, text, checked }, index (id)}
 			<div class="todo-item-container">
+				<!-- add on:remove -->
 				<TodoItem
 					text={`${index + 1}: ${text}`}
 					{checked}
 					on:checked={event => handleItemChecked(id, event.detail)}
+					on:remove={() => handleItemRemove(id)}
 				/>
 			</div>
     {/each}

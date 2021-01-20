@@ -19,6 +19,8 @@ function createTodoStore() {
       text,
       checked: false,
     }]),
+    // adding function for removing
+    remove: id => update(items => items.filter(item => item.id !== id)),
     setCheckedStatus: (id, checked) => {
       update(items => items.map(item => (item.id === id
         ? ({
