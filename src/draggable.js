@@ -1,10 +1,10 @@
-export function draggable(node) {
+export function draggable(node, { offset }) {
   let x;
   let y;
 
   function handleMousedown(event) {
-    x = event.clientX;
-    y = event.clientY;
+    x = event.clientX + offset;
+    y = event.clientY + offset;
 
     node.dispatchEvent(new CustomEvent('dragstart', {
       detail: { x, y }
@@ -26,8 +26,8 @@ export function draggable(node) {
   }
 
   function handleMouseup(event) {
-    x = event.clientX;
-    y = event.clientY;
+    x = event.clientX + offset;
+    y = event.clientY + offset;
 
     node.dispatchEvent(new CustomEvent('dragend', {
       detail: { x, y }

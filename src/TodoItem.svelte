@@ -50,7 +50,7 @@
 
 <div
   class="main-container"
-  use:draggable
+  use:draggable={{ offset: 50 }}
   on:dragstart={handleDragStart}
   on:dragmove={handleDragMove}
   on:dragend={handleDragEnd}
