@@ -8,7 +8,7 @@ export function custom(node, { duration }) {
     css: t => {
       const eased = cubicIn(t);
       return `
-        transform: scale(${eased}) skewX(${eased * 180}deg);
+        transform: translateX(0px);
       `
     }
   };

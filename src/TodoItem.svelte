@@ -1,8 +1,26 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { tweened } from 'svelte/motion';
+  import { tweened, spring } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
   import { interpolateLab } from 'd3-interpolate';
+  import { draggable } from './draggable.js';
+  
+  let coords = { x: 0, y: 0 };
+  
+  function handleDragStart() {
+
+  }
+  
+  function handleDragMove(event) {
+    coords = {
+      x: coords.x + event.detail.dx,
+      y: coords.y + event.detail.dy
+    };
+  }
+  
+  function handleDragEnd(event) {
+    coords = { x: 0, y: 0 };
+  }
   
   const dispatch = createEventDispatcher()
 
@@ -30,7 +48,16 @@
   }
 </script>
 
-<div class="main-container">
+<div
+  class="main-container"
+  use:draggable
+  on:dragstart={handleDragStart}
+  on:dragmove={handleDragMove}
+  on:dragend={handleDragEnd}
+  style="
+    transform: translate({coords.x}px, {coords.y}px)
+  "  
+>
   <div
     class="inner-container"
     style="background-color: {$checkedMotion};"
