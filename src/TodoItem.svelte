@@ -1,10 +1,12 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, getContext } from 'svelte'
   import { tweened, spring } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
   import { interpolateLab } from 'd3-interpolate';
   import { draggable } from './draggable.js';
   
+  const { getTodoItemsStore } = getContext('todoItemsStore')
+
   let coords = { x: 0, y: 0 };
   
   function handleDragStart() {
@@ -24,6 +26,7 @@
   
   const dispatch = createEventDispatcher()
 
+  export let id
   export let text
   export let checked
 
@@ -39,12 +42,12 @@
   });
 
   $: {
-    dispatch('checked', checked)
+    getTodoItemsStore().setCheckedStatus(id, checked)
     checkedMotion.set(checked ? '#64ad80' : '#faf792')
   }
 
   function handleRemoveClick() {
-    dispatch('remove')
+    getTodoItemsStore().remove(id)
   }
 </script>
 

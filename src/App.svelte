@@ -1,12 +1,20 @@
 <script>
+  import { setContext } from 'svelte'
   import AddTodoItem from './AddTodoItem.svelte'
   import TodoItem from './TodoItem.svelte'
-  import { todoItems } from './store'
-  import { todoStats } from './todoStatsStore'
+  import { createTodoItemsStore } from './store'
   import { quintOut } from 'svelte/easing';
   import { crossfade } from 'svelte/transition';
   import { flip } from 'svelte/animate';
   import BaseLayout from './Layouts/BaseLayout.svelte'
+  import { getStats } from './utils/stat'
+
+  let todoItemsStore = createTodoItemsStore()
+  $: todoStats = getStats($todoItemsStore)
+
+  setContext('todoItemsStore', {
+    getTodoItemsStore: () => todoItemsStore
+  });
 
   const [send, receive] = crossfade({
     duration: d => Math.sqrt(d * 200),
@@ -27,15 +35,7 @@
   });
 
   function handleAddTodoItem(event) {
-    todoItems.add(event.detail)
-  }
-
-  function handleItemChecked(id, checked) {
-    todoItems.setCheckedStatus(id, checked)
-  }
-
-  function handleItemRemove(id) {
-    todoItems.remove(id)
+    todoItemsStore.add(event.detail)
   }
 </script>
 
@@ -50,17 +50,17 @@
   <div class="add-todo-item-container">
     <AddTodoItem
       title='Please type todo here:'
-      buttonTitle={`Add (${$todoStats.doneCount}/${$todoStats.totalCount})`}
+      buttonTitle={`Add (${todoStats.doneCount}/${todoStats.totalCount})`}
       on:add={handleAddTodoItem}
     />
   </div>
   
-  {#if $todoStats.totalCount === 0}
+  {#if todoStats.totalCount === 0}
     No items yet
   {:else}
     <div class="todos-container">
       <div class="todo-items-container">
-        {#each $todoStats.notDoneItems as { id, text, checked }, index (id)}
+        {#each todoStats.notDoneItems as { id, text, checked }, index (id)}
           <div
             class="todo-item-container"
             in:receive="{{key: id}}"
@@ -68,16 +68,15 @@
             animate:flip="{{ duration: 500 }}"
           >
             <TodoItem
+              {id}
               text={`${index + 1}: ${text}`}
               {checked}
-              on:checked={event => handleItemChecked(id, event.detail)}
-              on:remove={() => handleItemRemove(id)}
             />
           </div>
         {/each}
       </div>
       <div class="todo-items-container">
-        {#each $todoStats.doneItems as { id, text, checked }, index (id)}
+        {#each todoStats.doneItems as { id, text, checked }, index (id)}
           <div
             class="todo-item-container"
             in:receive="{{key: id}}"
@@ -85,10 +84,9 @@
             animate:flip="{{ duration: 500 }}"
           >
             <TodoItem
+              {id}
               text={`${index + 1}: ${text}`}
               {checked}
-              on:checked={event => handleItemChecked(id, event.detail)}
-              on:remove={() => handleItemRemove(id)}
             />
           </div>
         {/each}
