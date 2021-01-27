@@ -6,6 +6,7 @@
   import { quintOut } from 'svelte/easing';
   import { crossfade } from 'svelte/transition';
   import { flip } from 'svelte/animate';
+  import BaseLayout from './Layouts/BaseLayout.svelte'
 
   const [send, receive] = crossfade({
     duration: d => Math.sqrt(d * 200),
@@ -38,14 +39,22 @@
   }
 </script>
 
-<div class="add-todo-item-container">
-  <AddTodoItem
-    title='Please type todo here:'
-    buttonTitle={`Add (${$todoStats.doneCount}/${$todoStats.totalCount})`}
-    on:add={handleAddTodoItem}
-  />
-</div>
 
+<BaseLayout>
+  <div slot="header" let:greeting={defaultGreeting}>
+    {defaultGreeting} This is a TODO app
+  </div>
+  <div slot="footer">
+    Thank you for using our app!
+  </div>
+  <div class="add-todo-item-container">
+    <AddTodoItem
+      title='Please type todo here:'
+      buttonTitle={`Add (${$todoStats.doneCount}/${$todoStats.totalCount})`}
+      on:add={handleAddTodoItem}
+    />
+  </div>
+  
   {#if $todoStats.totalCount === 0}
     No items yet
   {:else}
@@ -86,6 +95,7 @@
       </div>
     </div>
   {/if}
+</BaseLayout>
 
 <style>
   .add-todo-item-container {
