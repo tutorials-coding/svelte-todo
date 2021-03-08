@@ -10,22 +10,25 @@
       Thank you!
     </slot>
   </div>
-  {$$slots.footer ? 'Custom footer is provided' : ''}
 </div>
 
 <style>
-  .header-container {
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .content-container {
-  }
-  .footer-container {
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.header-container {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-container {
+  padding: 10px;
+}
+
+.footer-container {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 </style>

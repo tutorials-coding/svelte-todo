@@ -1,114 +1,140 @@
 <script>
-  import { setContext } from 'svelte'
-  import AddTodoItem from './AddTodoItem.svelte'
-  import TodoItem from './TodoItem.svelte'
-  import { createTodoItemsStore } from './store'
-  import { quintOut } from 'svelte/easing';
-  import { crossfade } from 'svelte/transition';
-  import { flip } from 'svelte/animate';
-  import BaseLayout from './Layouts/BaseLayout.svelte'
-  import { getStats } from './utils/stat'
+	import { setContext } from 'svelte'
+	import { crossfade } from 'svelte/transition';
+	import { cubicIn } from 'svelte/easing'
 
-  let todoItemsStore = createTodoItemsStore()
-  $: todoStats = getStats($todoItemsStore)
+	import AddTodoItem from './components/AddTodoItem.svelte'
+	import TodoItem from './components/TodoItem.svelte'
+	import { todoItems } from './store/customStore'
+	import { todoStats } from './store/todoStats'	
+	import { flip } from 'svelte/animate'
+	import BaseLayout from './layouts/BaseLayout.svelte'
+	import Dir from './components/Dir.svelte'
+	import { files } from './components/files'
+	import Tabs from './components/tabs/Tabs.svelte'
 
-  setContext('todoItemsStore', {
-    getTodoItemsStore: () => todoItemsStore
-  });
+	setContext('todos', todoItems)
 
-  const [send, receive] = crossfade({
-    duration: d => Math.sqrt(d * 200),
+	setContext('todo_user', {
+		name: "John"
+	})
 
-    fallback(node, params) {
-      const style = getComputedStyle(node);
-      const transform = style.transform === 'none' ? '' : style.transform;
+	const [ send, receive ] = crossfade({
+		duration: 250,
+		fallback(node, params) {
+			const style = getComputedStyle(node)
+			const transform = style.transform === 'none' ? '' : style.transform
 
-      return {
-        duration: 600,
-        easing: quintOut,
-        css: t => `
-          transform: ${transform} scale(${t});
-          opacity: ${t}
-        `
-      };
-    }
-  });
+			return {
+				duration: 250,
+				easing: cubicIn,
+				css: t => `
+					transform: ${transform} scale(${t});
+					opacity: ${t};
+				`
+			}
+		}
+	})
 
-  function handleAddTodoItem(event) {
-    todoItemsStore.add(event.detail)
-  }
+	function handleAddClick(event) {
+		todoItems.add(event.detail)
+	}
+	
+	function handleDoneChange(id, done) {
+		todoItems.setDone(id, done)
+	}
+
+	function handleRemove(id) {
+		todoItems.remove(id)
+	}
+
+	function handleKaydown(event) {
+		console.log('===>', event.key)
+	}
+	
+	function handleMouseenter(event) {
+		console.log('===>', event)
+	}
 </script>
 
+<svelte:window on:keydown={handleKaydown} />
+<svelte:body on:mouseenter={handleMouseenter} />
+<svelte:head>
+	<title>Home page</title>
+</svelte:head>
+
+<Dir name="root" {files} />
+
+<Tabs />
 
 <BaseLayout>
-  <div slot="header" let:greeting={defaultGreeting}>
-    {defaultGreeting} This is a TODO app
-  </div>
-  <div slot="footer">
-    Thank you for using our app!
-  </div>
-  <div class="add-todo-item-container">
-    <AddTodoItem
-      title='Please type todo here:'
-      buttonTitle={`Add (${todoStats.doneCount}/${todoStats.totalCount})`}
-      on:add={handleAddTodoItem}
-    />
-  </div>
-  
-  {#if todoStats.totalCount === 0}
-    No items yet
-  {:else}
-    <div class="todos-container">
-      <div class="todo-items-container">
-        {#each todoStats.notDoneItems as { id, text, checked }, index (id)}
-          <div
-            class="todo-item-container"
-            in:receive="{{key: id}}"
-            out:send="{{key: id}}"
-            animate:flip="{{ duration: 500 }}"
-          >
-            <TodoItem
-              {id}
-              text={`${index + 1}: ${text}`}
-              {checked}
-            />
-          </div>
-        {/each}
-      </div>
-      <div class="todo-items-container">
-        {#each todoStats.doneItems as { id, text, checked }, index (id)}
-          <div
-            class="todo-item-container"
-            in:receive="{{key: id}}"
-            out:send="{{key: id}}"
-            animate:flip="{{ duration: 500 }}"
-          >
-            <TodoItem
-              {id}
-              text={`${index + 1}: ${text}`}
-              {checked}
-            />
-          </div>
-        {/each}
-      </div>
-    </div>
-  {/if}
+	<div slot="header">
+		Welcome!
+	</div>
+	<AddTodoItem on:add={handleAddClick} />
+
+	{$todoStats.doneCount}/{$todoStats.totalCount}
+
+	<div class="todos-container">
+		<div class="todo-items-container">
+			{#each $todoItems.filter(item => !item.done) as { id, text, done }, index (id)}
+				<div
+					class="todo-item-container"
+					in:receive="{{ key: id }}"
+					out:send="{{ key: id }}"
+					animate:flip="{{ deration: 250 }}"
+				>
+					<TodoItem
+						title={`${index + 1}: ${text}`}
+						{done}
+						on:doneChange={event => handleDoneChange(id, event.detail)}
+						on:remove={() => handleRemove(id)}
+					/>
+				</div>
+			{:else}
+				No items yet
+			{/each}
+		</div>
+		<div class="todo-items-container">
+			{#each $todoItems.filter(item => item.done) as { id, text, done }, index (id)}
+				<div
+					class="todo-item-container"
+					in:receive="{{ key: id }}"
+					out:send="{{ key: id }}"
+					animate:flip="{{ deration: 250 }}"
+				>
+					<TodoItem
+						title={`${index + 1}: ${text}`}
+						{done}
+						on:doneChange={event => handleDoneChange(id, event.detail)}
+						on:remove={() => handleRemove(id)}
+					/>
+				</div>
+			{:else}
+				No items yet
+			{/each}
+		</div>
+	</div>
 </BaseLayout>
 
 <style>
-  .add-todo-item-container {
-    margin-bottom: 5px;
-  }
-  .todo-items-container {
-    flex: 1;
-    padding: 5px;
-    box-sizing: border-box;
-  }
-  .todo-items-container > .todo-item-container:not(:last-child) {
-    margin-bottom: 5px;
-  }
-  .todos-container {
-    width: 100%;
-    display: flex;
-  }
+	.todo-item-container {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+
+	.todos-container {
+		width: 100%;
+		display: flex;
+	}
+
+	.todo-items-container {
+		flex: 1;
+		padding: 5px;
+		box-sizing: border-box;
+	}
+	.footer-item {
+		font-size: 24px;
+		color: dimgray;
+	}
 </style>
