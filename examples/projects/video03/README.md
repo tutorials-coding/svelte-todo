@@ -2,7 +2,7 @@
 
 [![Жизненный цикл Svelte компонента video](https://img.youtube.com/vi/u-_pqJ9ARos/0.jpg)](https://youtu.be/u-_pqJ9ARos "Жизненный цикл Svelte компонента")
 
-В этом видео рассматриваем методы жизненного цикла компонентов Svelte, а именно onMount, onDestroy, beforeUpdate, afterUpdate, а также функция tick.
+В этом видео рассматриваем методы жизненного цикла компонентов Svelte, а именно `onMount`, `onDestroy`, `beforeUpdate`, `afterUpdate`, а также функция `tick`.
 
 ## Команда запуска приложения
 `npm run dev`
