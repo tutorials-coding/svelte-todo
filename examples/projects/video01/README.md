@@ -12,10 +12,10 @@
 Удобная команда запуска.
 
 ### degit
-[degit](https://github.com/Rich-Harris/degit) Каманда копирования git-репозитория.
+[degit](https://github.com/Rich-Harris/degit) - команда копирования git-репозитория.
 
 ## rollup.js
-[rollup.js](https://rollupjs.org/) Сборщик модулей JavaScript.
+[rollup.js](https://rollupjs.org/) - сборщик модулей JavaScript.
 
 ## Команда запуска приложения
 `npm run dev`
