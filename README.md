@@ -14,3 +14,5 @@
 12. [Специальные элементы (Special elements)](https://youtu.be/axGxAHwbYYg)
 
 👉 [Плейлист со всеми частями курса](https://www.youtube.com/playlist?list=PLmfIBo6rTVR5XNcJxu8TwzEvIDUCAhGc6)
+
+## (Приложение к обучающим YouTube-видео)[examples]
