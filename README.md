@@ -15,4 +15,4 @@
 
 👉 [Плейлист со всеми частями курса](https://www.youtube.com/playlist?list=PLmfIBo6rTVR5XNcJxu8TwzEvIDUCAhGc6)
 
-## (Приложение к обучающим YouTube-видео)[examples]
+## [Приложение к обучающим YouTube-видео](examples)
