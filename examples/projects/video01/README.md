@@ -1,6 +1,6 @@
 # Что такое Svelte и как он устроен?
 
-[![Что такое Svelte и как он устроен? video](https://img.youtube.com/vi/N4KXC7z/0.jpg)](https://youtu.be/N4KXC7z "Что такое Svelte и как он устроен?")
+[![Что такое Svelte и как он устроен? video](https://img.youtube.com/vi/N4KXC7z---Y/0.jpg)](https://youtu.be/N4KXC7z---Y "Что такое Svelte и как он устроен?")
 
 ## SVELTE
 Сайт проекта [Svelte](https://svelte.dev/)
