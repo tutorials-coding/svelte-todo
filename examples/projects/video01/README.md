@@ -5,7 +5,7 @@
 ## SVELTE
 Сайт проекта [Svelte](https://svelte.dev/)
 
-## Создать новый поект, перейти в папку проекта, установить зависимости проекта и запустить VS Code
+## Создать новый поект, перейти в папку, установить зависимости и запустить VS Code
 `npx degit sveltejs/template svelte-todo && cd svelte-todo && npm install  && code .`
 
 ### npx
