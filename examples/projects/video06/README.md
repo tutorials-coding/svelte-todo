@@ -2,7 +2,7 @@
 
 [![Байндинги и Привязки - Svelte Bindings video](https://img.youtube.com/vi/hHAszJgyUMc/0.jpg)](https://youtu.be/hHAszJgyUMc "Байндинги и Привязки - Svelte Bindings")
 
-В этом уроке рассмотрим привязки в Svelte, синтаксис и директиву `bind`:, привязки к компонентам и т.д.
+В этом уроке рассмотрим привязки в Svelte, синтаксис и директиву `bind:`, привязки к компонентам и т.д.
 
 ## Команда запуска приложения
 `npm run dev`
