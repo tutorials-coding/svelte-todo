@@ -2,7 +2,7 @@
 
 [![Как устроен Компонент в Svelte? video](https://img.youtube.com/vi/u-_pqJ9ARos/0.jpg)](https://youtu.be/u-_pqJ9ARos "Как устроен Компонент в Svelte?")
 
-В этом уроке рассмотрим компоненты Svelte, пропс (props, $$props, $$restProps, export let prop), реактивность SvelteJS, блоки script и style, изоляцию стилей и :global()
+В этом уроке рассмотрим компоненты Svelte, пропс (props, `$$props`, `$$restProps`, `export let prop`), реактивность SvelteJS, блоки `script` и `style`, изоляцию стилей и `:global()`
 
 ## Команда запуска приложения
 `npm run dev`
