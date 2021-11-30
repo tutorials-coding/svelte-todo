@@ -3,7 +3,6 @@
 [![Как работать с событиями в Svelte? video](https://img.youtube.com/vi/f1i-9RdxDCc/0.jpg)](https://youtu.be/f1i-9RdxDCc "Как работать с событиями в Svelte?")
 
 В этом уроке по Svelte рассматриваем работу с событиями в Svelte, а именно директиву `on`, модификаторы событий, переброс событий, `createEventDispatcher` и т.д.
-https://youtu.be/
 
 ## Команда запуска приложения
 `npm run dev`

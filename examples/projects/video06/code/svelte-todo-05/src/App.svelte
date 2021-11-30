@@ -3,6 +3,7 @@
 	import {v4 as uuid} from 'uuid';
 	import AddTodoItem from "./components/AddTodoItem.svelte";
 	import TodoItem from "./components/TodoItem.svelte";
+	import Examples from "./components/Examples.svelte";
 	import { getTodos } from "./utils/getTodos";
 
 	let items = [];
@@ -17,17 +18,26 @@
 	function handleAddClick(event){
 		items = [...items, {
 			id: uuid(),
-			text: event.detail
+			text: event.detail,
+			done: false,
 		}];
 	}
 
 </script>
 
-<AddTodoItem on:add={handleAddClick}  />
+<Examples />
 
-{#each items as { id, text }, index (id)}
+<AddTodoItem on:add={handleAddClick}  />
+<div>
+	<b>{items.filter(item => item.done).length} / {items.length}</b>
+</div>
+
+
+{#each items as { id, text, done }, index (id)}
 	<div class="todo-item-container">
-		<TodoItem title={`${index + 1}: ${text}`} />
+		<TodoItem 
+			title={`${index + 1}: ${text}`} 
+			bind:done={done} />
 	</div>
 {:else}
 	No items yet.

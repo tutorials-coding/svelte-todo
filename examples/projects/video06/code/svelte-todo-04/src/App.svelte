@@ -17,17 +17,24 @@
 	function handleAddClick(event){
 		items = [...items, {
 			id: uuid(),
-			text: event.detail
+			text: event.detail,
+			done: false,
 		}];
 	}
 
 </script>
 
 <AddTodoItem on:add={handleAddClick}  />
+<div>
+	<b>{items.filter(item => item.done).length} / {items.length}</b>
+</div>
 
-{#each items as { id, text }, index (id)}
+
+{#each items as { id, text, done }, index (id)}
 	<div class="todo-item-container">
-		<TodoItem title={`${index + 1}: ${text}`} />
+		<TodoItem 
+			title={`${index + 1}: ${text}`} 
+			bind:done={done} />
 	</div>
 {:else}
 	No items yet.
