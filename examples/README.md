@@ -7,4 +7,4 @@
 5. [События и обработка событий.](projects/video05)
 6. [Привязки (Bindings).](projects/video06)
 7. [Хранилище (Store).](projects/video07)
-8. [Анимации и переходы (Motion, Transition and Animation)](projects/video08)
+8. [Анимации и переходы (Motion, Transition and Animation).](projects/video08)
