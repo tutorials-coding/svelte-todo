@@ -37,6 +37,7 @@ import {
 
 ## Примеры
 
+1. [Пример №1](code/svelte-todo-01)
 2. [Пример №2](code/svelte-todo-02)
 3. [Пример №3](code/svelte-todo-03)
 4. [Пример №4](code/svelte-todo-04)
