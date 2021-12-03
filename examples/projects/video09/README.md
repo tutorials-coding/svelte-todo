@@ -1,6 +1,6 @@
 # Действия и директива use (Actions)
 
-[![Действия и директива use - Svelte Actions](https://img.youtube.com/vi/tx-o1QNHcCo/0.jpg)](https://youtu.be/tx-o1QNHcCo "Действия и директива use - Svelte Actions")
+[![Действия и директива use - Svelte Actions](https://img.youtube.com/vi/Eg18v8l1WdM/0.jpg)](https://youtu.be/Eg18v8l1WdM "Действия и директива use - Svelte Actions")
 
 В этом видео рассматриваем действия в Svelte, для чего они нужно и как ими пользоваться. Добавляем в проект директиву `use`, отправляем события из Действия и реализовываем функции Действий - `destroy` и `update`. 
 
