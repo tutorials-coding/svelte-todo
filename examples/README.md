@@ -8,3 +8,4 @@
 6. [Привязки (Bindings).](projects/video06)
 7. [Хранилище (Store).](projects/video07)
 8. [Анимации и переходы (Motion, Transition and Animation).](projects/video08)
+9. [Действия и директива use (Actions).](projects/video09)
