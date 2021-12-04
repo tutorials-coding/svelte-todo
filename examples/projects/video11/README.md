@@ -1,6 +1,6 @@
 # API контекста - Svelte Context API
 
-[![API контекста - Svelte Context API](https://img.youtube.com/vi/BmvwzMRUBFM/0.jpg)](https://youtu.be/BmvwzMRUBFM "API контекста - Svelte Context API")
+[![API контекста - Svelte Context API](https://img.youtube.com/vi/olyPCoIdgT0/0.jpg)](https://youtu.be/olyPCoIdgT0 "API контекста - Svelte Context API")
 
  В этом видео рассматриваем возможности контекста Svelte, функции `setContext`, `getContext` и `hasContext`, а также применение CSS классов по условию.
 
