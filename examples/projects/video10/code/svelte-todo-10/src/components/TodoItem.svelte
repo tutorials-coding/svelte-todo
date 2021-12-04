@@ -1,9 +1,17 @@
+<script context="module">
+    console.log('Hello from module');
+
+    let state = 5;
+</script>
+
 <script>
     import {createEventDispatcher, onMount} from 'svelte';
     import {tweened} from 'svelte/motion';
     import {cubicIn} from 'svelte/easing';
     import {interpolateLab} from 'd3-interpolate';
     import {draggable} from '../actions/draggable';
+
+    console.log('state', state);
 
     const dispatch = createEventDispatcher();
     export let title;
@@ -55,8 +63,8 @@
     on:dragstart={handleDragStart}
     on:dragmove={handleDragMove}
     on:dragend={handleDragEnd}
-    
     >
+    {state}
     <input 
         checked={done}
         type="checkbox" 
