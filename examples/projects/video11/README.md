@@ -1,9 +1,8 @@
-# API контекста - Svelte Context API
+# API контекста - Svelte Context API. Применение CSS классов по условию.
 
 [![API контекста - Svelte Context API](https://img.youtube.com/vi/olyPCoIdgT0/0.jpg)](https://youtu.be/olyPCoIdgT0 "API контекста - Svelte Context API")
 
- В этом видео рассматриваем возможности контекста Svelte, функции `setContext`, `getContext` и `hasContext`, а также применение CSS классов по условию.
-
+В этом видео рассматриваем возможности контекста Svelte, функции `setContext`, `getContext` и `hasContext`, а также применение CSS классов по условию.
 
 Контекст даёт возможность компонентам передавать друг другу сообщения без необходимости передавать данные через всю иерархию компонентов, т.е. от родителя к потомкам.
 
